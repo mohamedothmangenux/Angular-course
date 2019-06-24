@@ -1,0 +1,138 @@
+<button (click)="add()" class="btn btn-info">Add New</button>
+
+<ng-container *ngIf="courses.length > 0; then listcourses; else nolist"></ng-container>
+
+<ng-template #listcourses>
+
+    <ul class="ul-class" >
+        <li [ngClass]="{
+              'active': active,
+              'deactive': !active
+            }" *ngFor="let item of courses; trackBy:trackBycourses">
+          <button class="btn btn-sm btn-danger" (click)="remove(item)" >Remove</button>
+          {{item.course}}
+        
+        </li>
+    </ul>
+
+</ng-template>
+
+<ng-template #nolist>
+
+  No courses
+</ng-template>
+
+
+-----------------------------------
+
+<input class="form form-control" appInputFormat>
+
+
+-----------------------------------
+<!-- 
+<form #formData="ngForm" (ngSubmit)="formData.valid && checklogin(formData)">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
+      name="email" ngModel  #email="ngModel" required email (change)="somethingChanged(email)"
+      >
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+               Email is required.
+            </div>
+            <div *ngIf="email.errors.email">
+                This Is No Valid Email
+            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input class="form-control" type="password" ngModel name="password" #password="ngModel" required  placeholder="Enter Password"/>
+      
+      <div *ngIf="password.invalid && (password.dirty || password.touched)"
+              class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+                Password is required.
+            </div>
+        </div>
+        <label for="exampleInputEmail1">Re Password</label>
+      <input class="form-control" type="password" ngModel name="certainPassword" #certainPassword="ngModel" required [equalTo]="password"  placeholder="Re enter Password"/>
+      <div *ngIf="certainPassword.invalid && (certainPassword.dirty || certainPassword.touched)"
+              class="alert alert-danger">
+                <div *ngIf="certainPassword.errors.required">
+                  Password is required.
+                </div>
+                <div *ngIf="certainPassword.errors.equalTo">
+                    Password Must Be equalTo.
+                  </div>
+        </div>
+    </div>
+    <button type="submit" [disabled]="formData.invalid" class="btn btn-primary">Submit</button>
+  </form> -->
+
+  -----------------------------------
+
+
+  <div *ngIf="login.errors" class="alert alert-danger"> 
+        No User With This Data
+  </div>
+  <div *ngIf="email.pending">
+      <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+      </div>
+</div>
+<form [formGroup]="login" (ngSubmit)="rlogin()" >
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email"
+      formControlName="email"
+      >
+  
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+               Email is required.
+            </div>
+            <div *ngIf="email.errors.email">
+                This Is No Valid Email
+            </div>
+
+            <div *ngIf="email.errors.noSpeaceAllowed">
+                no Speace Allowed
+            </div>
+            <div *ngIf="email.errors.uniqueEmail">
+                Must Be Unique Email
+            </div>
+            
+            
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password"
+      formControlName="password"
+      />
+      
+      <div *ngIf="password.invalid && (password.dirty || password.touched)"
+              class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+                Password is required.
+            </div>
+        </div>
+      <label for="exampleInputEmail1">Re Password</label>
+      <input class="form-control" type="password"  name="certainPassword" id="certainPassword"  placeholder="Re enter Password"
+      formControlName="certainPassword"
+      />
+      <div *ngIf="certainPassword.invalid && (certainPassword.dirty || certainPassword.touched)"
+              class="alert alert-danger">
+                <div *ngIf="certainPassword.errors.required">
+                  Password is required.
+                </div>
+                <div *ngIf="certainPassword.errors.equalTo">
+                    Password Must Be equalTo.
+                  </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
