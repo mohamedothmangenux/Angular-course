@@ -10,16 +10,16 @@ import { NewCustomValidators } from '../../validators/new-custom-validators';
 export class TestComponent implements OnInit {
 
   courses = [
-    { "id": 1, "course": "PHP" },
-    { "id": 2, "course": "PHP 2" },
-    { "id": 3, "course": "PHP 3" },
-    { "id": 4, "course": "PHP 4" },
+    { id: 1, course: 'PHP' },
+    { id: 2, course: 'PHP 2' },
+    { id: 3, course: 'PHP 3' },
+    { id: 4, course: 'PHP 4' },
   ];
   active = true;
   login: any;
   ngOnInit(): void {
-    let password = new FormControl('', Validators.required);
-    let certainPassword = new FormControl('', CustomValidators.equalTo(password));
+    const password = new FormControl('', Validators.required);
+    const certainPassword = new FormControl('', CustomValidators.equalTo(password));
     this.login = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -27,8 +27,8 @@ export class TestComponent implements OnInit {
         CustomValidators.email,
         NewCustomValidators.noSpeaceAllowed
       ], NewCustomValidators.uniqueEmail),
-      password: password,
-      certainPassword: certainPassword
+      password,
+      certainPassword
     });
   }
   get email() { return this.login.get('email'); }
@@ -42,12 +42,12 @@ export class TestComponent implements OnInit {
     return item ? item.id : undefined;
   }
   add() {
-    let random = Math.random().toString(36).substring(7);
+    const random = Math.random().toString(36).substring(7);
     this.active = !this.active;
-    this.courses.push({ "id": 5, "course": random });
+    this.courses.push({ id: 5, course: random });
   }
   remove(item) {
-    let index = this.courses.indexOf(item);
+    const index = this.courses.indexOf(item);
     this.courses.splice(index, 1);
   }
   somethingChanged(object) {

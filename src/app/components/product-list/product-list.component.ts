@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductListComponent {
   products;
-  constructor(product_service:ProductsService) {
+  constructor(product_service: ProductsService) {
       this.products = product_service.getallproducts();
    }
 

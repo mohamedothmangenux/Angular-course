@@ -5,10 +5,10 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
 })
 export class InputFormatDirective {
   constructor(private el: ElementRef) { }
-  @HostListener('focus') onFocus(){
+  @HostListener('focus') onFocus() {
     this.highlight(null);
   }
-  @HostListener('blur') onBlur(){
+  @HostListener('blur') onBlur() {
     this.highlight('yellow');
   }
   private highlight(color: string) {
